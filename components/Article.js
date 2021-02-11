@@ -86,6 +86,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Prefessing My Love for Cupcakes',
+    date: 'Feb 10th, 2021',
+    firstParagraph: `Cupcake ipsum dolor sit amet jelly beans marzipan donut. Chocolate cake brownie muffin chocolate bar gingerbread sugar plum lemon drops ice cream. I love muffin candy wafer. Cookie sweet chocolate bar ice cream. Carrot cake pastry pudding I love halvah chocolate cake I love I love. Cheesecake chocolate cake halvah powder chocolate cake I love sesame snaps croissant bonbon. Marzipan I love soufflé liquorice sugar plum. Tart dessert donut chupa chups tart caramels chocolate bar. Danish jelly-o ice cream brownie liquorice halvah jelly marzipan. I love sweet bonbon croissant. Wafer toffee gingerbread cake jelly beans marshmallow cupcake dessert. Soufflé croissant cotton candy chocolate marzipan caramels. Chocolate macaroon jelly beans tart.`,
+    secondParagraph: `Pudding ice cream marzipan oat cake cake icing. Soufflé lollipop brownie I love cupcake croissant. Liquorice jujubes candy wafer croissant tart sugar plum. Sweet roll jelly beans dragée jelly-o chocolate cake I love pudding carrot cake gingerbread. Ice cream gingerbread sugar plum. I love chocolate bar bonbon toffee jelly-o wafer apple pie. I love dessert cake. Brownie chocolate cake bear claw. Icing lollipop I love. Cake dragée dessert cake. Chocolate chocolate cake sesame snaps dragée bear claw bonbon powder. Brownie wafer croissant chocolate tart bonbon tootsie roll soufflé. Carrot cake halvah I love I love.`,
+    thirdParagraph: `Lollipop sugar plum sesame snaps bonbon I love I love chocolate. Marzipan gingerbread ice cream dragée chocolate bar candy canes marzipan. I love halvah gummies I love fruitcake cheesecake toffee tart muffin. Danish fruitcake lemon drops cotton candy oat cake lemon drops marzipan topping cheesecake. Dragée jelly croissant jujubes bear claw toffee. Bear claw jelly-o gummies gingerbread donut chocolate. I love I love donut pudding brownie jelly caramels. Cake lollipop carrot cake ice cream I love I love cotton candy carrot cake pudding. Pastry chocolate I love tart. Liquorice sweet roll donut I love chocolate candy canes topping. Toffee chocolate bar lemon drops liquorice soufflé. Sweet gummi bears jelly-o tart I love dessert powder powder. Toffee soufflé candy canes.`
   }
 ];
 
@@ -114,3 +121,44 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+
+const articleMaker = (articleJson) => {
+
+  const article = document.createElement('div');
+  article.classList.add('article');
+
+  const header = document.createElement('h1');
+  header.textContent = articleJson.title;
+  article.appendChild(header);
+
+  const date = document.createElement('p');
+  date.textContent = articleJson.date;
+  date.classList.add('date');
+  article.appendChild(date);
+
+  const pKeys = ['firstParagraph', 'secondParagraph', 'thirdParagraph'];
+  pKeys.forEach(key => {
+    const pElement = document.createElement('p');
+    pElement.textContent = articleJson[key];
+    article.appendChild(pElement);
+  });
+
+  const expandButton = document.createElement('span');
+  expandButton.classList.add('expandButton');
+  expandButton.textContent = '+';
+  expandButton.addEventListener('click', () => article.classList.toggle('article-open'));
+  article.appendChild(expandButton);
+
+  return article;
+}
+
+
+
+const articlesDiv = document.querySelector('.articles');
+
+data.forEach(articleJson => {
+  const article = articleMaker(articleJson);
+  articlesDiv.appendChild(article);
+});
